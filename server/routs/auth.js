@@ -7,7 +7,6 @@ import { me } from "../utils/me.js";
 
 export const auth = Router()
 
-
 auth.post('/Login', async (req, res) => {
     if (!(req.body && req.body.agentCode && req.body.password)) {
         res.status(400).json({ 'messege': 'Bad Request' })
