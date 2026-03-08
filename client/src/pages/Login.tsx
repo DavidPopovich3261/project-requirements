@@ -1,8 +1,9 @@
 import { useState } from "react"
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const Navigate = useNavigate()
   const [password, setPassword] = useState('')
   const [agentCode, setAgentCode] = useState('')
   const [fullName, setFullName] = useState('')
@@ -12,8 +13,8 @@ function Login() {
     if (data.token) {
       localStorage.setItem('token', data.token)
       setFullName(data.user.fullName)
+      Navigate('AgentDashboard')
     }
-
   }
   return (
     <div>
@@ -21,7 +22,6 @@ function Login() {
       <input type="text" value={agentCode} onChange={(e) => setAgentCode(e.target.value)} placeholder="agentCode" />
       <button onClick={send}>login</button>
       {fullName && <div>walcome :{fullName}</div>}
-
     </div>
   )
 }
