@@ -9,5 +9,5 @@ export function creatToken(name, role) {
 
 export function verifyToken(token) {
     const res = jwt.verify(token, secret)
-    console.log(res);
+    return res
 }

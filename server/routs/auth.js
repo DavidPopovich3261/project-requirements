@@ -2,8 +2,10 @@ import { Router } from "express";
 import { creatToken, verifyToken } from '../utils/jwt.js'
 import { readcsv } from "../utils/readcsv.js";
 import { login } from "../utils/login.js";
-export const auth = Router()
+import { me } from "../utils/me.js";
 
+
+export const auth = Router()
 
 
 auth.post('/Login', async (req, res) => {
@@ -22,9 +24,17 @@ auth.post('/Login', async (req, res) => {
     res.status(200).json({ token, user })
 })
 
-auth.get('me', (req, res) => {
-    if (!(req.headers && req.headers.authorization)) {
 
+auth.get('/me', async (req, res) => {
+    if (!(req.headers && req.headers.authorization)) {
+        res.status(400).json({ 'messege': 'Bad Request' })
     }
-    verifyToken(req.headers.authorization)
+    const { name, role } = verifyToken(req.headers.authorization)
+    const user = await me(name, role)
+    if (!user) {
+        res.status(401).json({ 'messege': 'Unauthorized' })
+        return
+    }
+    res.status(200).json({ user })
+
 })
