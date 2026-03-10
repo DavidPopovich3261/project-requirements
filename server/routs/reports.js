@@ -4,11 +4,10 @@ import { agent } from "../Middleware/token.js";
 
 export const reports = Router()
 
-
-reports.post("/", upload.single("image"), (req, res) => {
+reports.post("/", agent, upload.single("image"), (req, res) => {
     if (req.file) {
         const image = req.file;
-        console.log(image);
+        console.log(image.path);
     }
     if (req.body) {
         console.log(req.body);
