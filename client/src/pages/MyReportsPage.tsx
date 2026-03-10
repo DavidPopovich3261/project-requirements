@@ -1,7 +1,9 @@
 
 function MyReportsPage() {
     return (
-        <div>MyReportsPage</div>
+        <>
+            <div>MyReportsPage</div>
+        </>
     )
 }
 

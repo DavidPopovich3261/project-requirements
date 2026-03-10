@@ -1,11 +1,11 @@
 import axios from "axios";
 
-
-export function Me() {
-    const data = async () => {
-        const res = axios.get('http://localhost:8080/auth/login',{Headers: { 'Authorization': token }})
-        const data = (await res).data
-        return data
+export async function Me() {
+    let token = localStorage.getItem('token');
+    if (!token) {
+        return
     }
+    const res = axios.get('http://localhost:8080/auth/me', { 'headers': { 'Authorization': token } })
+    const data = ((await res).data)
     return data
 }
