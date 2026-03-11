@@ -28,8 +28,7 @@ auth.get('/me', async (req, res) => {
     if (!(req.headers && req.headers.authorization)) {
         res.status(400).json({ 'messege': 'Bad Request' })
     }
-    const { name, role } = verifyToken(req.headers.authorization)
-    const user = await me(name, role)
+    const user = await me(req.headers.authorization)
     if (!user) {
         res.status(401).json({ 'messege': 'Unauthorized' })
         return
