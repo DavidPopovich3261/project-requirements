@@ -7,6 +7,9 @@ export async function pushReports(token, reports) {
         if (!(report.category != "" && report.urgency != "" && report.message != "")) {
             throw new Error("Bad Request");
         }
+        if (!report.imagePath) {
+            report.imagePath = null
+        }
         report.createdAt = new Date().toLocaleString()
         report.userid = user.id
         report.id = Math.random().toString(16).slice(2)
@@ -14,7 +17,6 @@ export async function pushReports(token, reports) {
     })
     try {
         const oldeReports = JSON.parse(await fs.readFile("data/reports.json", "utf8"))
-        console.log(JSON.stringify([...oldeReports, ...newReports]))
         await fs.writeFile("data/reports.json", JSON.stringify([...oldeReports, ...newReports]))
     } catch (error) {
         if (error.code == "ENOENT") {
@@ -23,5 +25,10 @@ export async function pushReports(token, reports) {
         else {
             console.error(error);
         }
-    } return newReports
+    }
+    
+    if (newReports.length > 1) {
+        return ({ importedCount: newReports.length, reports: newReports })
+    }
+    return newReports
 }

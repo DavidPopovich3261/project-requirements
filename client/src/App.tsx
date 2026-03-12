@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NewReportPage from "./pages/NewReportPage";
 import MyReportsPage from "./pages/MyReportsPage";
 import Auth from "./utils/Auth";
+import NewReportPageCsv from "./pages/NewReportPageCsv";
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
           <Route path="/NewReportPage" element={
             <Auth>
               <NewReportPage />
+            </Auth>
+          } />
+          <Route path="/NewReportPageCsv" element={
+            <Auth>
+              <NewReportPageCsv />
             </Auth>
           } />
           <Route path="/MyReportsPage" element={

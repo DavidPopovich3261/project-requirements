@@ -4,16 +4,17 @@ export function agent(req, res, next) {
     if (!(req.headers && req.headers.authorization)) {
         res.status(400).json({ 'messege': 'Bad Request' })
     }
-    const { role } = verifyToken(req.headers.authorization)
-    if (role) next()
+    req.user = verifyToken(req.headers.authorization)
+    if (req.user != undefined) next()
 }
 
 export function admin(req, res, next) {
     if (!(req.headers && req.headers.authorization)) {
         res.status(400).json({ 'messege': 'Bad Request' })
     }
-    const { role } = verifyToken(req.headers.authorization)
-    if (role == "admin") { next() }
+
+    req.user = verifyToken(req.headers.authorization)
+    if (req.user.role == "admin") { next() }
     else {
         res.status(401).json({ 'messege': 'Unauthorized' })
     }

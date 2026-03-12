@@ -6,6 +6,7 @@ function AgentDashboard() {
         <div>
             <Link to="/NewReportPage" >New Report Page</Link>
             <Link to="/MyReportsPage" >My Reports Page</Link>
+            <Link to="/NewReportPageCsv">New Report Page Csv</Link>
         </div>
     )
 }

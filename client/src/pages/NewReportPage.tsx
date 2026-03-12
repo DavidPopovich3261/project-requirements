@@ -38,9 +38,7 @@ function NewReportPage() {
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setFields({ ...Fields, message: e.target.value }) }}
           />
           <button onClick={(e) => {
-            sendReport(e, uploadFile, Fields,
-              // setFields
-            )
+            sendReport(e, uploadFile, Fields            )
           }}>Upload</button>
         </form>
       </div>
